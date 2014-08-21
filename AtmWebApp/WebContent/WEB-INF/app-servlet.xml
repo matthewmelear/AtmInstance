@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+
+http://www.springframework.org/schema/context 
+
+http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan
+        base-package="com.atmWebApp.controllers" />
+
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+	  	<property name="url" value="jdbc:postgresql://localhost:5432/ATM_ASSIGNMENT" />
+		<property name="username" value="postgres" />
+		<property name="password" value="Oregonducks900" />
+		<property name="connectionProperties">
+        <props>
+            <prop key="oracle.net.READ_TIMEOUT">60000</prop>
+        </props>
+    </property>
+	</bean>
+	
+<!-- 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> -->
+<!-- 		<constructor-arg ref="dataSource" /> -->
+<!-- 	</bean> -->
+	
+	
+ 	<bean id="namedParameterJdbcTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+ 		<constructor-arg ref="dataSource" />
+	</bean>
+	
+
+
+<!-- Daos -->
+<bean name="accountDao" class="com.atmWebApp.daos.AccountDao" autowire="byName"></bean>
+<bean name="transactionDao" class="com.atmWebApp.daos.TransactionDao" autowire="byName"></bean>
+
+<!-- Services -->
+<bean name="accountService" class="com.atmWebApp.services.AccountService" autowire="byName"></bean>
+<bean name="transactionService" class="com.atmWebApp.services.TransactionService" autowire="byName"></bean>
+
+<!-- Controllers -->
+<bean name="accountController" class="com.atmWebApp.controllers.AccountController" autowire="byName"></bean> 
+
+</beans>
