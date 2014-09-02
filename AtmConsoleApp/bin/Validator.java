@@ -22,7 +22,6 @@ public class Validator {
 		
 		try {
 		  double postCastAmount = Double.parseDouble(amount);
-		  isValidNumber = postCastAmount > 0 ? true : false;
 		} catch (Exception e){
 			isValidNumber = false;
 		}

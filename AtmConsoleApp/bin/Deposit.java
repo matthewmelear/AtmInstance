@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -17,11 +18,11 @@ public class Deposit implements ITransaction{
 	}
 	
 	@Override
-	public void execute(String accountId) {
+	public void execute(String accountId) throws SQLException {
 		executeDeposit(accountId);
 	}
 
-	public double executeDeposit(String accountId){
+	public double executeDeposit(String accountId) throws SQLException{
 		BalanceInquiry bi = new BalanceInquiry();
 		boolean canContinue = false;
 		while (!canContinue){
