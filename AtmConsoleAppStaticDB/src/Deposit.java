@@ -35,13 +35,9 @@ public class Deposit implements ITransaction{
 			}
 		}
 		double accountBalance = bi.executeBalanceInquiry(accountId);
-		if (amount <= accountBalance){
-			Dao.deposit(accountId, amount);
-			accountBalance = bi.executeBalanceInquiry(accountId);
-			Menu.transactionComplete();
-		} else {
-			Menu.displayInsufficientFundsMessage();
-		}
+		Dao.deposit(accountId, amount);
+		accountBalance = bi.executeBalanceInquiry(accountId);
+		Menu.transactionComplete();
 		return accountBalance;
 	}
 

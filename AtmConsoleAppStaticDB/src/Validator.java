@@ -17,7 +17,7 @@ public class Validator {
 		boolean hasValidCents = true;
 		boolean isValidNumber = true;
 		if (amount.contains(".")){
-			hasValidCents = amount.substring(amount.indexOf(".")).length() == 2;
+			hasValidCents = amount.substring(amount.indexOf(".") + 1).length() == 2;
 		} 
 		
 		try {
